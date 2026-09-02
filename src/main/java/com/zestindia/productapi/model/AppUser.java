@@ -8,10 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Application user used for authentication. Named AppUser to avoid
- * clashing with java.security.Principal / SQL reserved word "user".
- */
+
 @Entity
 @Table(name = "app_user", indexes = {
         @Index(name = "idx_app_user_username", columnList = "username", unique = true)

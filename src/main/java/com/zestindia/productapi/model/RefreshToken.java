@@ -24,7 +24,6 @@ public class RefreshToken {
     @Column(nullable = false)
     private Instant expiryDate;
 
-    /** Set true the moment this token is used to mint a new one (rotation) or explicitly logged out. */
     @Column(nullable = false)
     private boolean revoked = false;
 

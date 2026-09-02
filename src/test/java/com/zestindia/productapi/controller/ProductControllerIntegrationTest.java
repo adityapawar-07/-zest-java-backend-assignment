@@ -17,14 +17,7 @@ import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-/**
- * End-to-end tests for the Product CRUD API, exercised through the real
- * Spring context (security filters, JWT auth, validation, JPA/H2) via
- * MockMvc rather than mocked layers. Each test runs inside a transaction
- * that is rolled back afterwards, so tests never leak Product/Item rows
- * into one another - only the seeded admin/user accounts (created once by
- * DataSeeder at startup) are shared and reused for login.
- */
+
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional

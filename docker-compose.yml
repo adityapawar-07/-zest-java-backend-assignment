@@ -29,7 +29,6 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/productdb
       SPRING_DATASOURCE_USERNAME: productapi
       SPRING_DATASOURCE_PASSWORD: productapi
-      # Override this with a real, randomly generated secret before any real deployment.
       APP_JWT_SECRET: change_this_before_any_real_deployment_32_chars_minimum
       APP_CORS_ALLOWED_ORIGINS: http://localhost:3000,http://localhost:5173
     ports:

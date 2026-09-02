@@ -25,7 +25,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity // enables @PreAuthorize on controller methods for role-based authorization
+@EnableMethodSecurity 
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -35,7 +35,7 @@ public class SecurityConfig {
     @Value("#{'${app.cors.allowed-origins}'.split(',')}")
     private List<String> allowedOrigins;
 
-    /** Off by default so local Postman/http testing keeps working; flip to true behind a real TLS terminator. */
+    
     @Value("${app.security.require-https:false}")
     private boolean requireHttps;
 
@@ -83,18 +83,16 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(csrf -> csrf.disable()) // stateless JWT API - no CSRF-vulnerable cookie session
+                .csrf(csrf -> csrf.disable()) 
                 .exceptionHandling(ex -> ex
                         .authenticationEntryPoint(restAuthenticationHandlers)
                         .accessDeniedHandler(restAuthenticationHandlers))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/auth/**").permitAll()
-                        .requestMatchers("/h2-console/**").permitAll() // dev-only H2 console
+                        .requestMatchers("/h2-console/**").permitAll() 
                         .requestMatchers("/actuator/health").permitAll()
-                        // Swagger / OpenAPI docs
                         .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**").permitAll()
-                        // Reads: any authenticated user. Writes: role-checked at the method level via @PreAuthorize.
                         .anyRequest().authenticated()
                 )
                 .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin())) // needed for H2 console

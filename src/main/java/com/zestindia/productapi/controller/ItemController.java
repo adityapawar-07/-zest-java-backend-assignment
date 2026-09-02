@@ -15,13 +15,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * Simple companion endpoint so items can be created under a product.
- * The assignment spec only calls out GET /api/v1/products/{id}/items,
- * but a create endpoint is included here so that endpoint has data to
- * return when you test the API.
- */
+
 @RestController
+@Validated
 @RequestMapping("/api/v1/products/{productId}/items")
 public class ItemController {
 

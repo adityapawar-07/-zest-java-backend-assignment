@@ -15,11 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-/**
- * End-to-end tests for /api/v1/auth/**, run against the real Spring
- * context (Spring Security, BCrypt, JWT, H2). Rolled back after each test
- * via @Transactional so registered test users never leak between tests.
- */
+
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional

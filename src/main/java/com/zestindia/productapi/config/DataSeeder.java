@@ -9,15 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-/**
- * Seeds a default admin user on startup ONLY if no users exist yet, so
- * there's something to log in with immediately (register/login endpoints
- * work fine too - this is just a convenience for first-time testing).
- *
- * Practice-project shortcut: credentials are logged in plaintext at
- * startup. Do not do this in anything real - print a one-time setup
- * link or require a manual reset instead.
- */
+
 @Component
 public class DataSeeder implements CommandLineRunner {
 

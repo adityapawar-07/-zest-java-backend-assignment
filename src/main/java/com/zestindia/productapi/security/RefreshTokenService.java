@@ -40,11 +40,7 @@ public class RefreshTokenService {
         return refreshTokenRepository.save(refreshToken);
     }
 
-    /**
-     * Validates the given refresh token and, if valid, revokes it and issues
-     * a replacement (rotation). Throws IllegalArgumentException if the token
-     * is unknown, revoked, or expired.
-     */
+    
     public RefreshToken rotate(String presentedToken) {
         RefreshToken existing = refreshTokenRepository.findByToken(presentedToken)
                 .orElseThrow(() -> new IllegalArgumentException("Refresh token not recognized"));

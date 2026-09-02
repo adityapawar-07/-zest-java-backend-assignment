@@ -9,16 +9,7 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * Swagger / OpenAPI 3 documentation, served at:
- *  - /swagger-ui.html      (interactive UI)
- *  - /v3/api-docs          (raw JSON spec)
- *
- * Registers a "bearerAuth" scheme so requests can be authorized in the UI
- * with the accessToken returned from POST /api/v1/auth/login - click
- * "Authorize", paste the token (no "Bearer " prefix needed), and every
- * protected endpoint you try from the UI will send it automatically.
- */
+
 @Configuration
 public class OpenApiConfig {
 

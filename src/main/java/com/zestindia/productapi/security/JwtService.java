@@ -12,13 +12,7 @@ import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.function.Function;
 
-/**
- * Handles creation and validation of short-lived JWT ACCESS tokens.
- * Refresh tokens are opaque random strings persisted in the DB (see
- * RefreshTokenService) so they can be individually revoked/rotated -
- * a JWT refresh token can't be revoked server-side without a blocklist,
- * so we don't use one here.
- */
+
 @Service
 public class JwtService {
 

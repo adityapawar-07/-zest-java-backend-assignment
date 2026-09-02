@@ -30,7 +30,6 @@ public class AuthController {
         return ResponseEntity.ok(authService.login(request));
     }
 
-    /** Rotation: the presented refresh token is revoked and a new access + refresh token pair is returned. */
     @PostMapping("/refresh")
     public ResponseEntity<AuthResponse> refresh(@Valid @RequestBody RefreshRequest request) {
         return ResponseEntity.ok(authService.refresh(request.getRefreshToken()));

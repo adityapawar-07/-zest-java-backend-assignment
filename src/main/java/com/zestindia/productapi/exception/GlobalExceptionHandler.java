@@ -19,10 +19,6 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // Malformed/incomplete JSON in the request body (missing closing brace,
-    // trailing comma, wrong type for a field, etc.) throws this during
-    // @RequestBody binding - without an explicit handler it falls through
-    // to the generic 500 below, which is misleading: it's a client error.
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ErrorResponse> handleUnreadableBody(HttpMessageNotReadableException ex, HttpServletRequest request) {
         ErrorResponse error = new ErrorResponse(
@@ -34,9 +30,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
-    // @PreAuthorize denials throw this from inside the controller method, so it
-    // reaches this @ControllerAdvice before Spring Security's own AccessDeniedHandler
-    // ever sees it - without this handler it falls through to the generic 500 below.
+   
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ErrorResponse> handleAccessDenied(AccessDeniedException ex, HttpServletRequest request) {
         ErrorResponse error = new ErrorResponse(

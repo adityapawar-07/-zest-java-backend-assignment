@@ -54,8 +54,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 }
             }
         } catch (Exception ex) {
-            // Invalid/expired token: leave the security context empty so the
-            // request falls through to Spring Security's normal 401/403 handling.
+         
             SecurityContextHolder.clearContext();
         }
 

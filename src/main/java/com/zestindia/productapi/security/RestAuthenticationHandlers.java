@@ -15,19 +15,13 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-/**
- * Ensures unauthenticated (401) and unauthorized (403) responses use the
- * same JSON ErrorResponse shape as the rest of the API instead of Spring
- * Security's default HTML/plain-text error pages.
- */
+
 @Component
 public class RestAuthenticationHandlers implements AuthenticationEntryPoint, AccessDeniedHandler {
 
     private final ObjectMapper objectMapper;
 
-    // Reuses the same Spring-Boot-configured ObjectMapper bean (ISO-8601 dates
-    // via JavaTimeModule) that the rest of the app's JSON responses use -
-    // avoids the timestamp-as-number-array format a plain `new ObjectMapper()` gives.
+   
     public RestAuthenticationHandlers(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
