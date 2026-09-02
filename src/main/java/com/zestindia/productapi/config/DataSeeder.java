@@ -1,0 +1,42 @@
+package com.zestindia.productapi.config;
+
+import com.zestindia.productapi.model.AppUser;
+import com.zestindia.productapi.model.Role;
+import com.zestindia.productapi.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+
+/**
+ * Seeds a default admin user on startup ONLY if no users exist yet, so
+ * there's something to log in with immediately (register/login endpoints
+ * work fine too - this is just a convenience for first-time testing).
+ *
+ * Practice-project shortcut: credentials are logged in plaintext at
+ * startup. Do not do this in anything real - print a one-time setup
+ * link or require a manual reset instead.
+ */
+@Component
+public class DataSeeder implements CommandLineRunner {
+
+    private static final Logger log = LoggerFactory.getLogger(DataSeeder.class);
+
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    public DataSeeder(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @Override
+    public void run(String... args) {
+        if (userRepository.count() == 0) {
+            userRepository.save(new AppUser("admin", passwordEncoder.encode("admin123"), Role.ROLE_ADMIN));
+            userRepository.save(new AppUser("user", passwordEncoder.encode("user123"), Role.ROLE_USER));
+            log.info("Seeded default accounts -> admin/admin123 (ROLE_ADMIN), user/user123 (ROLE_USER)");
+        }
+    }
+}
